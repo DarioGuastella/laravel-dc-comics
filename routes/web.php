@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $dati = config("data");
-    return view('home', $dati);
-})->name("home");
-
+// Route::get('/', function () {
+//     $dati = config("data");
+//     return view('home', $dati);
+// })->name("home");
+Route::get('/', [ComicController::class, "index"])->name("home");
 Route::resource("comics", ComicController::class);

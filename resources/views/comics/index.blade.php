@@ -1,27 +1,116 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <h2>Fumetti</h2>
+    <header class="d-flex container justify-content-between">
+        <!-- Logo -->
+        <img class="p-4 header-logo" src="../assets/img/dc-logo.png" alt="">
+        <!-- navigatore -->
+        <nav class="d-flex align-items-center myNav">
+
+            @foreach ($dati['navPages'] as $navPage)
+                <a class="{{ $navPage['page'] == 'COMICS' ? 'mx-3 active' : 'mx-3' }}"
+                    href="#">{{ $navPage['page'] }}</a>
+            @endforeach
+
+        </nav>
+    </header>
+    <!-- Jumbotron -->
+    <div id="jumbotron">
+        <img id="jumbo" src="../assets/img/jumbotron.jpg" alt="">
+    </div>
+
+    <!-- Comics cards -->
+    <section class="my-bg-dark">
+        <div class="container">
+            <div class="currentSeries myBtn">
+                <h3>CURRENT SERIES</h3>
+            </div>
+            <div id="cardsWrapper">
+                @foreach ($comics as $comic)
+                    <div class="myCard">
+                        <a href="{{ route('comics.show', $comic->id) }}"><img src="{{ $comic->thumb }}" class="comics-img"
+                                alt="{{ $comic->title }}"></a>
+                        <h3 class="comics-title">{{ strtoupper($comic->title) }}</h3>
+                    </div>
+                @endforeach
+            </div>
+            <div class="d-flex justify-content-center">
+                <button class="myBtn loadBtn">
+                    <h3 class="loadText">LOAD MORE</h3>
+                </button>
+            </div>
+
         </div>
-        <div class="row">
-            @foreach ($comics as $comic)
-                <div class="col-3">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ $comic->thumb }}" class="card-img-top" alt="{{ $comic->title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $comic->title }}</h5>
-                            <p class="card-text">{{ $comic->description }}</p>
-                            <p class="card-text">
-                                Prezzo: {{ $comic->price }}<br>
-                                Serie: {{ $comic->series }}<br>
-                                Data di vendita: {{ $comic->sale_date }}
-                            </p>
+    </section>
+    <!-- CLIENTS -->
+    <section id="buyRow">
+        <div class="container d-flex justify-content-center p-5">
+            <div class="d-flex align-items-center">
+
+                @foreach ($dati['clients'] as $client)
+                    <div class="text-center ps-5 pe-2">
+                        <img class="buy-img" src="{{ $client['image'] }}" alt="">
+                        <div class="mt-2">
+                            <h3 class="buy-text">{{ strtoupper($client['title']) }}</h3>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+
+            </div>
         </div>
-    </div>
+    </section>
+    <!-- FOOTER -->
+    <section class="container-fluid upper-footer">
+        {{-- ToDo: snellire codice --}}
+        <div class="d-flex justify-content-around overflow-y-hidden">
+            <div class="d-flex p-5">
+                <ul class="footer-item">
+                    <h5 class="text-white">{{ $dati['DCCOMICS'][0]['class'] }}</h5>
+                    @foreach ($dati['DCCOMICS'] as $DCcomic)
+                        <li class="text-secondary"><a class="footer-link" href="#">{{ $DCcomic['title'] }}</a></li>
+                    @endforeach
+                    <ul class="footer-item ps-0">
+                        <h5 class="text-white mt-2">{{ $dati['SHOPS'][0]['class'] }}</h5>
+                        @foreach ($dati['SHOPS'] as $Shop)
+                            <li class="text-secondary"><a class="footer-link" href="#">{{ $Shop['title'] }}</a></li>
+                        @endforeach
+                    </ul>
+                </ul>
+                <ul class="footer-item">
+                    <h5 class="text-white">{{ $dati['DC'][0]['class'] }}</h5>
+                    @foreach ($dati['DC'] as $DClink)
+                        <li class="text-secondary"><a class="footer-link" href="#">{{ $DClink['title'] }}</a></li>
+                    @endforeach
+                </ul>
+                <ul class="footer-item">
+                    <h5 class="text-white">{{ $dati['SITES'][0]['class'] }}</h5>
+                    @foreach ($dati['SITES'] as $site)
+                        <li class="text-secondary"><a class="footer-link" href="#">{{ $site['title'] }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="footer-wrapper-img">
+                <img class="footer-bg" src="/assets/img/dc-logo-bg.png" alt="">
+            </div>
+        </div>
+
+
+
+    </section>
+    <section class="lower-footer">
+        <div class="container d-flex justify-content-between h-100 align-items-center">
+            <div>
+                <button class="btn btn-outline-light my-footer-btn">SIGN-UP NOW!</button>
+            </div>
+            <div class="d-flex align-items-center">
+                <h5 class="mb-0 pe-3 lower-text">FOLLOW US</h5>
+                <img class="lower-footer-img" src="../assets/img/footer-facebook.png" alt="">
+                <img class="lower-footer-img" src="../assets/img/footer-periscope.png" alt="">
+                <img class="lower-footer-img" src="../assets/img/footer-pinterest.png" alt="">
+                <img class="lower-footer-img" src="../assets/img/footer-twitter.png" alt="">
+                <img class="lower-footer-img" src="../assets/img/footer-youtube.png" alt="">
+            </div>
+        </div>
+
+    </section>
 @endsection
