@@ -32,13 +32,13 @@
                                 alt="{{ $comic->title }}"></a>
                         <h3 class="comics-title">{{ strtoupper($comic->title) }}</h3>
                         {{-- <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-warning">Modifica</a> --}}
+                        <form action="{{ route('comics.destroy', $comic->id) }}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Cancella" class="btn btn-danger">
+                            <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-warning">Modifica</a>
+                        </form>
                     </div>
-                    <form action="{{ route('comics.destroy', $comic->id) }}" method="POST" class="d-inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Cancella" class="btn btn-danger">
-                    </form>
-                    <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-warning">Modifica</a>
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
