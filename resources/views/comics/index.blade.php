@@ -31,12 +31,16 @@
                         <a href="{{ route('comics.show', $comic->id) }}"><img src="{{ $comic->thumb }}" class="comics-img"
                                 alt="{{ $comic->title }}"></a>
                         <h3 class="comics-title">{{ strtoupper($comic->title) }}</h3>
+                        {{-- <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-warning">Modifica</a> --}}
                     </div>
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
                 <button class="myBtn loadBtn">
-                    <h3 class="loadText">LOAD MORE</h3>
+                    <a href="{{ route('comics.create') }}">
+                        <h3 class="loadText">AGGIUNGI FUMETTO</h3>
+                    </a>
+
                 </button>
             </div>
 
