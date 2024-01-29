@@ -34,13 +34,8 @@ class ComicController extends Controller
         $data = $request->all();
 
         $fumetto = new Comic();
-        $fumetto->title = $data["title"];
-        $fumetto->description = $data["description"];
-        $fumetto->thumb = $data["thumb"];
-        $fumetto->price = $data["price"];
-        $fumetto->series = $data["series"];
-        $fumetto->sale_date = $data["sale_date"];
-        $fumetto->type = $data["type"];
+
+        $fumetto->fill($data);
         $fumetto->save();
 
         return redirect()->route("comics.show", $fumetto->id);
