@@ -11,7 +11,7 @@ class Comic extends Model
 
     protected $fillable = [
         "title",
-        "descrpition",
+        "description",
         "thumb",
         "price",
         "series",
