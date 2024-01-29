@@ -42,12 +42,12 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
-                <button class="myBtn loadBtn">
-                    <a href="{{ route('comics.create') }}">
-                        <h3 class="loadText">AGGIUNGI FUMETTO</h3>
-                    </a>
 
-                </button>
+                <a class="myBtn loadBtn" href="{{ route('comics.create') }}">
+                    <h3 class="loadText">AGGIUNGI FUMETTO</h3>
+                </a>
+
+
             </div>
 
         </div>

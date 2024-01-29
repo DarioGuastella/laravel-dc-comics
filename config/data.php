@@ -1,6 +1,29 @@
 <?php
 
 return [
+    "table" => [
+        [
+            "title"
+        ],
+        [
+            "description"
+        ],
+        [
+            "thumb"
+        ],
+        [
+            "price"
+        ],
+        [
+            "series"
+        ],
+        [
+            "sale_date"
+        ],
+        [
+            "type"
+        ],
+    ],
     "navPages" => [
         [
             "page" => "CHARACTERS"

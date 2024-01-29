@@ -4,10 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Comic;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
+
+    public function validation($data)
+    {
+        $validated = Validator::make(
+            $data,
+            [
+                "title" => "required|min:5|max:50",
+                "description" => "",
+                "thumb" => "max:200",
+                "price" => "required",
+                "series" => "required|max:20",
+                "sale_date" => "required|max:20",
+                "type" => "required|max:20"
+            ],
+            [
+                'title.required' => 'Il titolo è necessario',
+                'price.required' => 'Il prezzo è necessario',
+                'series.required' => 'Il nome della serie è necessario',
+                'sale_date.required' => 'La data di vendita è necessaria',
+                'type.required' => 'Il tipo di fumetto è necessario',
+            ]
+        )->validate();
+
+        return $validated;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +48,8 @@ class ComicController extends Controller
      */
     public function create()
     {
-        return view("comics.create");
+        $dati = config("data");
+        return view("comics.create", compact("dati"));
     }
 
     /**
@@ -41,10 +67,11 @@ class ComicController extends Controller
         //     "type" => "required|max:20"
         // ]);
         $data = $request->all();
+        $dati_validati = $this->validation($data);
 
         $fumetto = new Comic();
 
-        $fumetto->fill($data);
+        $fumetto->fill($dati_validati);
         $fumetto->save();
 
         return redirect()->route("comics.show", $fumetto->id);
@@ -72,7 +99,8 @@ class ComicController extends Controller
     public function update(Request $request, Comic $comic)
     {
         $data = $request->all();
-        $comic->update($data);
+        $dati_validati = $this->validation($data);
+        $comic->update($dati_validati);
 
         return redirect()->route("comics.show", $comic->id);
     }

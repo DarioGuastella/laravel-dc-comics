@@ -10,7 +10,9 @@
         </div>
         <div class="row">
             <p>{{ $comic->description }}</p>
-            <a href="{{ route('comics.index') }}" class="btn btn-warning">Torna alla sezione fumetti</a>
+            <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-warning">Modifica</a>
+            <a href="{{ route('comics.index') }}" class="btn btn-primary mt-3">Torna alla sezione fumetti</a>
+
         </div>
     </div>
 @endsection
