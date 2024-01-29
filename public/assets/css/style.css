@@ -121,6 +121,11 @@ nav a {
     color: #777;
 }
 
+.footer-link:hover {
+    color: #0282f9;
+    transition: 0.5s;
+}
+
 /* footer inferiore */
 
 .lower-footer {
